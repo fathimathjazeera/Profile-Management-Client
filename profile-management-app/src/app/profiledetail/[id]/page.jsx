@@ -1,18 +1,38 @@
 'use client'
-import Navbar from '@/components/Navbar';
+
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import Header from '@/components/Header';
-import Bio from '@/components/Bio';
-import ProgrammingCard from '@/components/ProgrammingCard';
-import CaseStudy from '@/components/CaseStudy';
-import VisualResume from '@/components/VisualResume';
-import Footer from '@/components/Footer';
+import Header from './components/Header/Header';
+import Bio from './components/Bio/Bio';
+import ProgrammingCard from '@/components/ProgrammingCard/ProgrammingCard';
+import CaseStudy from './components/CaseStudy/CaseStudy';
+import VisualResume from './components/VisualResumeCard/VisualResume';
+import Footer from './components/Footer/Footer';
+import Navbar from './components/Navbar/Navbar';
 import axios from 'axios';
 
 const page = ({params}) => {
+  const {id} = params
+  
+  const [singleProfile,setSingleProfile] = useState('')
+  const fetchSingleProfile=async()=>{
+ 
+    const response = await axios.get(`https://profile-management-server.onrender.com/api/singleprofile/${id}`
+    )
+    const {data,status}=response.data
+    if(status=="success"){
+      console.log(data,"single data");
+    setSingleProfile(data)
+    }else{
+      console.log("failed to fetch")
+    }
+    }
 
-
+    useEffect (() => {
+ fetchSingleProfile()
+ console.log(singleProfile,"single");
+    }, [])
+ 
     
 
   return (

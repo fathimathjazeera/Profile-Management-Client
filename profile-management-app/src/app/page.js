@@ -1,33 +1,34 @@
 'use client'
+import profiles from "@/components/data";
+import Navbar from "@/components/Navbar";
+import ProfileCard from "@/components/ProfileCard";
+import { useEffect, useState } from "react";
+import axios from 'axios'
 
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image';
-import Header from './components/Header/Header';
-import Bio from './components/Bio/Bio';
-import ProgrammingCard from '@/components/ProgrammingCard/ProgrammingCard';
-import CaseStudy from './components/CaseStudy/CaseStudy';
-import VisualResume from './components/VisualResumeCard/VisualResume';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navbar/Navbar';
-import axios from 'axios';
+export default function Home() {
 
-const page = ({params}) => {
+  const [allProfiles,setAllprofiles] =useState([])
 
+const fetchAllProfiles=async()=>{
  
-    
+const response = await axios.get('https://profile-management-server.onrender.com/api/allprofiles')
+const {data,status}=response.data
+if(status=="success"){
+  console.log(data);
+setAllprofiles([...data])
+}else{
+  console.log("failed to fetch")
+}
+}
+useEffect(() => {
+  fetchAllProfiles()
+}, [])
 
   return (
-    <>
+    <main >
     <Navbar />
- <Header profile={singleProfile}/>
- <Bio profile={singleProfile}/>
- <ProgrammingCard profile={singleProfile}/>
- <CaseStudy profile={singleProfile}/>
- <VisualResume profile={singleProfile}/>
- <Footer profile={singleProfile}/>
-    </>
-  )
+    <ProfileCard profiles={allProfiles} />
+
+    </main>
+  );
 }
-
-
-export default page

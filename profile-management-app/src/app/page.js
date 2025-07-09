@@ -1,7 +1,6 @@
 'use client'
-import profiles from "@/components/data";
-import Navbar from "@/components/Navbar";
-import ProfileCard from "@/components/ProfileCard";
+import Navbar from "../components/Navbar/Navbar";
+import ProfileCard from "../components/ProfileCard/ProfileCard";
 import { useEffect, useState } from "react";
 import axios from 'axios'
 

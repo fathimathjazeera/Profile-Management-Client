@@ -1,19 +1,19 @@
 'use client'
-
+import Navbar from '@/components/Navbar/Navbar';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
-import Header from './components/Header/Header';
-import Bio from './components/Bio/Bio';
+import Header from '@/components/Header/Header';
+import Bio from '@/components/Bio/Bio';
 import ProgrammingCard from '@/components/ProgrammingCard/ProgrammingCard';
-import CaseStudy from './components/CaseStudy/CaseStudy';
-import VisualResume from './components/VisualResumeCard/VisualResume';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navbar/Navbar';
+import CaseStudy from '@/components/CaseStudyCard/CaseStudy';
+import VisualResume from '@/components/VisualResumeCard/VisualResume';
+import Footer from '@/components/Footer/Footer';
 import axios from 'axios';
 
 const page = ({params}) => {
+
   const {id} = params
-  
+  console.log(params,"params");
   const [singleProfile,setSingleProfile] = useState('')
   const fetchSingleProfile=async()=>{
  
@@ -32,7 +32,6 @@ const page = ({params}) => {
  fetchSingleProfile()
  console.log(singleProfile,"single");
     }, [])
- 
     
 
   return (
@@ -42,7 +41,7 @@ const page = ({params}) => {
  <Bio profile={singleProfile}/>
  <ProgrammingCard profile={singleProfile}/>
  <CaseStudy profile={singleProfile}/>
- <VisualResume profile={singleProfile}/>
+ <VisualResume profile={singleProfile} />
  <Footer profile={singleProfile}/>
     </>
   )
